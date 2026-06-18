@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLADE — барбершоп | Павлодар</title>
+<meta name="description" content="Барбершоп BLADE — стрижки, бороды, уход. Запись онлайн.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #C8A24B;
+  --bg: #0A0A0A;
+  --bg-card: #141414;
+  --bg-card-hover: #1C1C1C;
+  --text: #F5F5F5;
+  --text-muted: #8A8A8A;
+  --border: #262626;
+  --radius: 14px;
+  --font: 'Inter', sans-serif;
+  --display: 'Oswald', sans-serif;
+  --max-width: 480px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font);
+  background:
+    radial-gradient(1200px 400px at 50% -100px, rgba(200,162,75,0.08), transparent),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: var(--max-width); margin: 0 auto; padding: 48px 16px 40px; }
+section { margin-bottom: 28px; }
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+.header { text-align: center; }
+.logo {
+  width: 96px; height: 96px; border-radius: 50%;
+  margin: 0 auto 18px; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(145deg, #1c1c1c, #0d0d0d);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 30px rgba(200,162,75,0.25);
+  font-size: 40px;
+}
+.header h1 { font-family: var(--display); font-size: 34px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; }
+.header .role { color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+.header .city { font-size: 13px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+
+.status { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 6px 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 999px; font-size: 13px; color: var(--text-muted); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #3ECF6B; box-shadow: 0 0 8px #3ECF6B; }
+
+.divider { width: 40px; height: 2px; background: var(--accent); margin: 24px auto; opacity: .6; }
+
+.menu-title { font-family: var(--display); text-transform: uppercase; letter-spacing: 2px; font-size: 13px; color: var(--text-muted); margin-bottom: 12px; text-align: center; }
+.price-list { display: flex; flex-direction: column; gap: 2px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.price-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.price-row:last-child { border-bottom: none; }
+.price-row .name { font-weight: 600; font-size: 15px; }
+.price-row .name span { display: block; font-size: 12px; color: var(--text-muted); font-weight: 400; margin-top: 2px; }
+.price-row .price { font-family: var(--display); font-size: 17px; color: var(--accent); white-space: nowrap; }
+
+.links { display: flex; flex-direction: column; gap: 10px; }
+.link-btn {
+  display: flex; align-items: center; gap: 14px; padding: 17px 20px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  text-decoration: none; color: var(--text); font-weight: 600; font-size: 15px;
+  transition: background .3s, transform .2s, border-color .3s;
+}
+.link-btn:hover { background: var(--bg-card-hover); transform: translateX(4px); border-color: var(--accent); }
+.link-btn svg { width: 20px; height: 20px; fill: var(--accent); flex-shrink: 0; }
+.link-btn .arrow { margin-left: auto; fill: #444; width: 16px; height: 16px; }
+
+.cta-btn {
+  display: block; width: 100%; padding: 18px;
+  background: var(--accent); color: #1a1306; border: none; border-radius: var(--radius);
+  font-family: var(--display); font-size: 17px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  text-align: center; text-decoration: none; cursor: pointer; transition: opacity .3s, transform .2s;
+}
+.cta-btn:hover { opacity: .9; transform: scale(1.02); }
+.cta-btn:active { transform: scale(.98); }
+
+.footer { text-align: center; padding: 30px 0 6px; }
+.footer p { font-size: 12px; color: #3a3a3a; }
+.footer a { color: var(--text-muted); text-decoration: none; font-size: 12px; border-bottom: 1px solid var(--border); }
+.footer a:hover { color: var(--accent); border-color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <section class="header fade-in">
+    <div class="logo">💈</div>
+    <h1>BLADE</h1>
+    <p class="role">барбершоп</p>
+    <p class="city">Павлодар</p>
+    <div class="status"><span class="dot"></span>Открыто до 21:00</div>
+  </section>
+
+  <div class="divider fade-in"></div>
+
+  <section class="fade-in">
+    <p class="menu-title">Услуги</p>
+    <div class="price-list">
+      <div class="price-row"><div class="name">Мужская стрижка<span>машинка + ножницы</span></div><div class="price">5 000 ₸</div></div>
+      <div class="price-row"><div class="name">Стрижка бороды<span>моделирование + уход</span></div><div class="price">3 500 ₸</div></div>
+      <div class="price-row"><div class="name">Стрижка + борода<span>комплекс</span></div><div class="price">7 500 ₸</div></div>
+      <div class="price-row"><div class="name">Камуфляж седины</div><div class="price">от 4 000 ₸</div></div>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <div class="links">
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5z"/></svg>
+        Записаться онлайн
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14.2a7.2 7.2 0 01-6-3.22c.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08a7.2 7.2 0 01-6 3.22z"/></svg>
+        Instagram
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+        Как нас найти (2ГИС)
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.21z"/></svg>
+        Позвонить
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <a href="#" class="cta-btn">Записаться в WhatsApp</a>
+  </section>
+
+  <footer class="footer fade-in">
+    <p>© BLADE 2026 · ул. Примерная 1, Павлодар</p>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var els=document.querySelectorAll('.fade-in');
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:.12});
+  els.forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

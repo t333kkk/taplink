@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Онлайн-запись · GlamStudio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #6C5CE7;
+  --accent2: #00D2B8;
+  --accent-g: linear-gradient(135deg, #6C5CE7, #00D2B8);
+  --bg: #08080C;
+  --bg2: #0E0E14;
+  --card: #121218;
+  --card-h: #181822;
+  --text: #F4F4F6;
+  --muted: #8A8A99;
+  --border: #23232E;
+  --ok: #00D2B8;
+  --r: 16px;
+  --font: 'Inter', -apple-system, sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font);background:radial-gradient(800px 300px at 50% -80px,rgba(108,92,231,.15),transparent),var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+.container{max-width:480px;margin:0 auto;padding:40px 16px 60px;}
+
+.header{text-align:center;margin-bottom:32px;}
+.logo{width:56px;height:56px;border-radius:14px;background:var(--accent-g);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;margin:0 auto 14px;}
+.header h1{font-size:24px;font-weight:800;letter-spacing:-.5px;}
+.header p{color:var(--muted);font-size:14px;margin-top:6px;}
+
+/* STEPS INDICATOR */
+.steps-ind{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:28px;}
+.steps-ind .dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:all .3s;}
+.steps-ind .dot.active{background:var(--accent);box-shadow:0 0 10px rgba(108,92,231,.4);}
+.steps-ind .dot.done{background:var(--ok);}
+.steps-ind .line{width:24px;height:2px;background:var(--border);}
+
+/* STEP CONTENT */
+.step-page{animation:fadeUp .35s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.step-title{font-size:16px;font-weight:700;margin-bottom:16px;text-align:center;}
+
+/* SELECTABLE CARDS */
+.opt-grid{display:flex;flex-direction:column;gap:8px;}
+.opt{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between;}
+.opt:hover{background:var(--card-h);border-color:#333;}
+.opt.selected{border-color:var(--accent);background:rgba(108,92,231,.08);box-shadow:0 0 16px rgba(108,92,231,.12);}
+.opt .opt-left{display:flex;align-items:center;gap:12px;}
+.opt .opt-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.opt .opt-name{font-size:15px;font-weight:600;}
+.opt .opt-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.opt .opt-price{font-size:15px;font-weight:800;background:var(--accent-g);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;}
+.opt .check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+.opt.selected .check{border-color:var(--accent);background:var(--accent);}
+.opt.selected .check::after{content:'✓';color:#fff;font-size:12px;font-weight:800;}
+
+/* STAFF CARDS */
+.staff-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.staff-opt{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;cursor:pointer;transition:all .2s;}
+.staff-opt:hover{background:var(--card-h);}
+.staff-opt.selected{border-color:var(--accent);background:rgba(108,92,231,.08);}
+.staff-opt .s-ava{width:48px;height:48px;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;}
+.staff-opt .s-name{font-size:14px;font-weight:700;}
+.staff-opt .s-spec{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* DATE PICKER */
+.date-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:20px;}
+.date-grid .dh{text-align:center;font-size:11px;color:var(--muted);font-weight:600;padding:6px 0;}
+.date-grid .dd{text-align:center;padding:10px 0;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;background:var(--card);border:1px solid transparent;}
+.date-grid .dd:hover{background:var(--card-h);}
+.date-grid .dd.selected{background:var(--accent);color:#fff;border-color:var(--accent);}
+.date-grid .dd.today{border-color:var(--accent);}
+.date-grid .dd.disabled{opacity:.25;cursor:default;pointer-events:none;}
+.date-grid .dd.empty{background:transparent;cursor:default;pointer-events:none;}
+.date-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.date-nav span{font-size:15px;font-weight:700;}
+.date-nav button{width:34px;height:34px;border-radius:8px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.date-nav button:hover{background:var(--card-h);}
+
+/* TIME SLOTS */
+.time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.time-slot{text-align:center;padding:12px 0;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;background:var(--card);border:1px solid var(--border);transition:all .2s;}
+.time-slot:hover{background:var(--card-h);border-color:#333;}
+.time-slot.selected{background:var(--accent);color:#fff;border-color:var(--accent);}
+.time-slot.taken{opacity:.2;cursor:default;pointer-events:none;text-decoration:line-through;}
+
+/* FORM */
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:5px;}
+.field input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:15px;font-family:var(--font);outline:none;transition:border-color .2s;}
+.field input:focus{border-color:var(--accent);}
+.field input::placeholder{color:#555;}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:10px;margin-top:20px;}
+.btn{flex:1;padding:16px;border-radius:12px;font-size:15px;font-weight:700;text-align:center;cursor:pointer;transition:all .2s;border:none;font-family:var(--font);}
+.btn-next{background:var(--accent-g);color:#fff;}
+.btn-next:hover{opacity:.9;transform:translateY(-1px);}
+.btn-next:disabled{opacity:.3;cursor:default;transform:none;}
+.btn-back{background:var(--card);color:var(--text);border:1px solid var(--border);}
+.btn-back:hover{background:var(--card-h);}
+
+/* SUCCESS */
+.success{text-align:center;padding:40px 0;}
+.success .s-icon{width:72px;height:72px;border-radius:50%;background:rgba(0,210,184,.12);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px;}
+.success h2{font-size:22px;font-weight:800;margin-bottom:8px;}
+.success p{color:var(--muted);font-size:14px;line-height:1.6;}
+.success .summary{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-top:20px;text-align:left;}
+.success .sum-row{display:flex;justify-content:space-between;padding:8px 0;font-size:13px;border-bottom:1px solid var(--border);}
+.success .sum-row:last-child{border:none;}
+.success .sum-row .sl{color:var(--muted);}
+.success .sum-row .sv{font-weight:600;}
+
+/* LANG SWITCH */
+.lang{position:fixed;top:16px;right:16px;display:flex;gap:4px;}
+.lang button{padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;background:var(--card);border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;}
+.lang button.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+</style>
+</head>
+<body>
+
+<div class="lang" id="lang-sw"></div>
+
+<div class="container">
+  <div class="header">
+    <div class="logo" id="salon-logo">G</div>
+    <h1 id="salon-name">GlamStudio</h1>
+    <p id="header-sub"></p>
+  </div>
+
+  <div class="steps-ind" id="steps-ind"></div>
+  <div id="step-content"></div>
+</div>
+
+<script>
+// ===== I18N =====
+const T = {
+  ru: {
+    sub:'Выберите услугу и запишитесь онлайн',
+    step1:'Выберите услугу', step2:'Выберите мастера', step3:'Дата и время', step4:'Ваши данные',
+    next:'Далее', back:'Назад', book:'Записаться',
+    name:'Ваше имя', phone:'Телефон', instagram:'Instagram (необязательно)',
+    namePh:'Как к вам обращаться?', phonePh:'+7 (___) ___-__-__', igPh:'@username',
+    hair:'Волосы', nails:'Ногти', brows:'Брови/Ресницы', care:'Уход',
+    min:'мин', any:'Любой свободный',
+    successTitle:'Вы записаны!',
+    successText:'Ваша запись принята. Мы ждём вас!',
+    service:'Услуга', master:'Мастер', date:'Дата', time:'Время', price:'Стоимость',
+    newBooking:'Записаться ещё',
+    mon:'Пн',tue:'Вт',wed:'Ср',thu:'Чт',fri:'Пт',sat:'Сб',sun:'Вс',
+    months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+    fillName:'Введите имя', fillPhone:'Введите телефон'
+  },
+  kz: {
+    sub:'Қызметті таңдап, онлайн жазылыңыз',
+    step1:'Қызметті таңдаңыз', step2:'Шеберді таңдаңыз', step3:'Күні мен уақыты', step4:'Сіздің деректеріңіз',
+    next:'Келесі', back:'Артқа', book:'Жазылу',
+    name:'Сіздің атыңыз', phone:'Телефон', instagram:'Instagram (міндетті емес)',
+    namePh:'Сізге қалай хабарласуға болады?', phonePh:'+7 (___) ___-__-__', igPh:'@username',
+    hair:'Шаш', nails:'Тырнақ', brows:'Қас/Кірпік', care:'Күтім',
+    min:'мин', any:'Кез келген бос',
+    successTitle:'Сіз жазылдыңыз!',
+    successText:'Сіздің жазбаңыз қабылданды. Сізді күтеміз!',
+    service:'Қызмет', master:'Шебер', date:'Күні', time:'Уақыт', price:'Құны',
+    newBooking:'Тағы жазылу',
+    mon:'Дс',tue:'Сс',wed:'Ср',thu:'Бс',fri:'Жм',sat:'Сн',sun:'Жс',
+    months:['Қаңтар','Ақпан','Наурыз','Сәуір','Мамыр','Маусым','Шілде','Тамыз','Қыркүйек','Қазан','Қараша','Желтоқсан'],
+    fillName:'Атыңызды енгізіңіз', fillPhone:'Телефонды енгізіңіз'
+  }
+};
+let lang = localStorage.getItem('glam_lang') || 'ru';
+function t(k) { return T[lang][k] || T.ru[k] || k; }
+
+// ===== SHARED DATA =====
+const STORE_KEY = 'glam_data';
+let DB = { clients:[], staff:[], services:[], appointments:[], settings:{salonName:'GlamStudio',workStart:'09:00',workEnd:'21:00'} };
+function loadDB(){ try{ const d=localStorage.getItem(STORE_KEY); if(d) DB=JSON.parse(d); } catch(e){} }
+function saveDB(){ localStorage.setItem(STORE_KEY, JSON.stringify(DB)); }
+function genId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+loadDB();
+
+// ===== STATE =====
+let step = 1;
+let selected = { serviceId:null, staffId:null, date:null, time:null, name:'', phone:'', instagram:'' };
+let calMonth = new Date().getMonth();
+let calYear = new Date().getFullYear();
+
+const catIcons = { hair:'✂️', nails:'💅', brows:'👁️', care:'🧴' };
+
+function fmt(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+
+// ===== RENDER =====
+function render(){
+  // header
+  document.getElementById('salon-name').textContent = DB.settings.salonName || 'GlamStudio';
+  document.getElementById('header-sub').textContent = t('sub');
+
+  // logo
+  const logoEl = document.getElementById('salon-logo');
+  if(DB.settings.logoData){
+    logoEl.innerHTML = `<img src="${DB.settings.logoData}" style="width:56px;height:56px;border-radius:14px;object-fit:cover;">`;
+    logoEl.style.background = 'none';
+  } else {
+    logoEl.textContent = DB.settings.logoEmoji || (DB.settings.salonName||'G').charAt(0);
+  }
+
+  // lang
+  document.getElementById('lang-sw').innerHTML = ['ru','kz'].map(l =>
+    `<button class="${l===lang?'active':''}" onclick="lang='${l}';localStorage.setItem('glam_lang','${l}');render();">${l.toUpperCase()}</button>`
+  ).join('');
+
+  // steps indicator
+  const totalSteps = 4;
+  let dots = '';
+  for(let i=1;i<=totalSteps;i++){
+    const cls = i===step?'active':(i<step?'done':'');
+    dots += `<div class="dot ${cls}"></div>`;
+    if(i<totalSteps) dots += `<div class="line"></div>`;
+  }
+  document.getElementById('steps-ind').innerHTML = dots;
+
+  // content
+  const el = document.getElementById('step-content');
+  switch(step){
+    case 1: el.innerHTML = renderStep1(); break;
+    case 2: el.innerHTML = renderStep2(); break;
+    case 3: el.innerHTML = renderStep3(); break;
+    case 4: el.innerHTML = renderStep4(); break;
+    case 5: el.innerHTML = renderSuccess(); break;
+  }
+}
+
+// STEP 1: Choose service
+function renderStep1(){
+  const cats = ['hair','nails','brows','care'];
+  let html = `<div class="step-page"><p class="step-title">${t('step1')}</p><div class="opt-grid">`;
+  cats.forEach(cat => {
+    const svcs = DB.services.filter(s => s.category === cat);
+    svcs.forEach(s => {
+      const sel = selected.serviceId === s.id ? 'selected' : '';
+      html += `<div class="opt ${sel}" onclick="selectService('${s.id}')">
+        <div class="opt-left">
+          <div class="opt-icon" style="background:var(--card)">${catIcons[cat]||'✦'}</div>
+          <div><div class="opt-name">${s.name}</div><div class="opt-sub">${s.duration} ${t('min')} · ${t(cat)}</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="opt-price">${fmt(s.price)} ₸</span>
+          <div class="check"></div>
+        </div>
+      </div>`;
+    });
+  });
+  html += `</div><div class="btn-row"><button class="btn btn-next" ${!selected.serviceId?'disabled':''} onclick="nextStep()">${t('next')}</button></div></div>`;
+  return html;
+}
+
+// STEP 2: Choose master
+function renderStep2(){
+  const svc = DB.services.find(s => s.id === selected.serviceId);
+  const relevantStaff = svc ? DB.staff.filter(s => s.specialization === svc.category) : DB.staff;
+  const allStaff = relevantStaff.length ? relevantStaff : DB.staff;
+
+  let html = `<div class="step-page"><p class="step-title">${t('step2')}</p><div class="staff-opts">`;
+
+  // "any" option
+  const anySel = selected.staffId === 'any' ? 'selected' : '';
+  html += `<div class="staff-opt ${anySel}" onclick="selectStaff('any')">
+    <div class="s-ava" style="background:var(--border)">?</div>
+    <div class="s-name">${t('any')}</div>
+  </div>`;
+
+  allStaff.forEach(s => {
+    const sel = selected.staffId === s.id ? 'selected' : '';
+    html += `<div class="staff-opt ${sel}" onclick="selectStaff('${s.id}')">
+      <div class="s-ava" style="background:${s.color}">${s.name.charAt(0)}</div>
+      <div class="s-name">${s.name}</div>
+      <div class="s-spec">${t(s.specialization)}</div>
+    </div>`;
+  });
+  html += `</div><div class="btn-row"><button class="btn btn-back" onclick="prevStep()">${t('back')}</button><button class="btn btn-next" ${!selected.staffId?'disabled':''} onclick="nextStep()">${t('next')}</button></div></div>`;
+  return html;
+}
+
+// STEP 3: Date & Time
+function renderStep3(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const first = new Date(calYear, calMonth, 1);
+  const lastDay = new Date(calYear, calMonth+1, 0).getDate();
+  let startDow = first.getDay(); if(startDow===0) startDow=7; // Mon=1
+
+  const dayKeys = ['mon','tue','wed','thu','fri','sat','sun'];
+  let dh = dayKeys.map(d => `<div class="dh">${t(d)}</div>`).join('');
+
+  let cells = '';
+  for(let i=1;i<startDow;i++) cells += `<div class="dd empty"></div>`;
+  for(let d=1;d<=lastDay;d++){
+    const date = new Date(calYear, calMonth, d);
+    const ds = date.toISOString().slice(0,10);
+    const isPast = date < today;
+    const isToday = ds === today.toISOString().slice(0,10);
+    const isSel = selected.date === ds;
+    const cls = isPast?'disabled':(isSel?'selected':(isToday?'today':''));
+    cells += `<div class="dd ${cls}" onclick="selectDate('${ds}')">${d}</div>`;
+  }
+
+  // time slots
+  let timeHtml = '';
+  if(selected.date){
+    const startH = parseInt(DB.settings.workStart) || 9;
+    const endH = parseInt(DB.settings.workEnd) || 21;
+    const busyTimes = getBusyTimes(selected.date, selected.staffId);
+    for(let h=startH;h<endH;h++){
+      for(let m=0;m<60;m+=30){
+        const ts = (h<10?'0':'')+h+':'+(m<10?'0':'')+m;
+        const isSel = selected.time === ts;
+        const isTaken = busyTimes.has(ts);
+        // don't show past times for today
+        const now = new Date();
+        const slotDate = new Date(selected.date+'T'+ts);
+        const isPast = slotDate < now;
+        const cls = isSel?'selected':(isTaken||isPast?'taken':'');
+        timeHtml += `<div class="time-slot ${cls}" onclick="${isTaken||isPast?'':'selectTime(\''+ts+'\')'}">${ts}</div>`;
+      }
+    }
+  }
+
+  const monthLabel = t('months')[calMonth] + ' ' + calYear;
+
+  return `<div class="step-page"><p class="step-title">${t('step3')}</p>
+    <div class="date-nav">
+      <button onclick="prevMonth()">◀</button>
+      <span>${monthLabel}</span>
+      <button onclick="nextMonth()">▶</button>
+    </div>
+    <div class="date-grid">${dh}${cells}</div>
+    ${selected.date ? `<div class="time-grid">${timeHtml}</div>` : ''}
+    <div class="btn-row"><button class="btn btn-back" onclick="prevStep()">${t('back')}</button><button class="btn btn-next" ${!(selected.date&&selected.time)?'disabled':''} onclick="nextStep()">${t('next')}</button></div>
+  </div>`;
+}
+
+function getBusyTimes(date, staffId){
+  const busy = new Set();
+  DB.appointments.filter(a => {
+    if(a.date !== date || a.status === 'cancelled') return false;
+    if(staffId && staffId !== 'any') return a.staffId === staffId;
+    return true;
+  }).forEach(a => {
+    const svc = DB.services.find(s => s.id === a.serviceId);
+    const dur = svc ? svc.duration : 60;
+    const [hh,mm] = a.time.split(':').map(Number);
+    for(let m=0; m<dur; m+=30){
+      const totalMin = hh*60 + mm + m;
+      const h2 = Math.floor(totalMin/60);
+      const m2 = totalMin%60;
+      busy.add((h2<10?'0':'')+h2+':'+(m2<10?'0':'')+m2);
+    }
+  });
+  return busy;
+}
+
+// STEP 4: Contact info
+function renderStep4(){
+  return `<div class="step-page"><p class="step-title">${t('step4')}</p>
+    <div class="field"><label>${t('name')} *</label><input id="b-name" value="${selected.name}" placeholder="${t('namePh')}" oninput="selected.name=this.value"></div>
+    <div class="field"><label>${t('phone')} *</label><input id="b-phone" type="tel" value="${selected.phone}" placeholder="${t('phonePh')}" oninput="selected.phone=this.value"></div>
+    <div class="field"><label>${t('instagram')}</label><input id="b-ig" value="${selected.instagram}" placeholder="${t('igPh')}" oninput="selected.instagram=this.value"></div>
+    <div class="btn-row"><button class="btn btn-back" onclick="prevStep()">${t('back')}</button><button class="btn btn-next" onclick="submitBooking()">${t('book')}</button></div>
+  </div>`;
+}
+
+// SUCCESS
+function renderSuccess(){
+  const svc = DB.services.find(s => s.id === selected.serviceId);
+  const stf = selected.staffId==='any' ? null : DB.staff.find(s => s.id === selected.staffId);
+  const d = new Date(selected.date);
+  const months = t('months');
+  const dateStr = d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear();
+
+  document.getElementById('steps-ind').innerHTML = '';
+
+  return `<div class="step-page"><div class="success">
+    <div class="s-icon">✓</div>
+    <h2>${t('successTitle')}</h2>
+    <p>${t('successText')}</p>
+    <div class="summary">
+      <div class="sum-row"><span class="sl">${t('service')}</span><span class="sv">${svc?svc.name:'—'}</span></div>
+      <div class="sum-row"><span class="sl">${t('master')}</span><span class="sv">${stf?stf.name:t('any')}</span></div>
+      <div class="sum-row"><span class="sl">${t('date')}</span><span class="sv">${dateStr}</span></div>
+      <div class="sum-row"><span class="sl">${t('time')}</span><span class="sv">${selected.time}</span></div>
+      <div class="sum-row"><span class="sl">${t('price')}</span><span class="sv">${svc?fmt(svc.price)+' ₸':'—'}</span></div>
+    </div>
+    <div class="btn-row" style="margin-top:24px"><button class="btn btn-next" onclick="resetBooking()">${t('newBooking')}</button></div>
+  </div></div>`;
+}
+
+// ===== ACTIONS =====
+window.selectService = function(id){ selected.serviceId=id; render(); };
+window.selectStaff = function(id){ selected.staffId=id; render(); };
+window.selectDate = function(ds){ selected.date=ds; selected.time=null; render(); };
+window.selectTime = function(ts){ selected.time=ts; render(); };
+
+window.nextStep = function(){ step++; render(); };
+window.prevStep = function(){ step--; render(); };
+
+window.prevMonth = function(){
+  calMonth--; if(calMonth<0){calMonth=11;calYear--;}
+  render();
+};
+window.nextMonth = function(){
+  calMonth++; if(calMonth>11){calMonth=0;calYear++;}
+  render();
+};
+
+window.submitBooking = function(){
+  if(!selected.name.trim()){ alert(t('fillName')); return; }
+  if(!selected.phone.trim()){ alert(t('fillPhone')); return; }
+
+  // reload DB in case admin added data in another tab
+  loadDB();
+
+  // find or create client
+  let client = DB.clients.find(c => c.phone === selected.phone.replace(/\D/g,''));
+  if(!client){
+    client = {
+      id: genId(),
+      name: selected.name.trim(),
+      phone: selected.phone.trim(),
+      instagram: selected.instagram.trim(),
+      notes: '',
+      preferences: '',
+      loyaltyVisits: 0,
+      createdAt: new Date().toISOString()
+    };
+    DB.clients.push(client);
+  } else {
+    if(selected.name.trim()) client.name = selected.name.trim();
+    if(selected.instagram.trim()) client.instagram = selected.instagram.trim();
+  }
+
+  // resolve staff
+  let staffId = selected.staffId;
+  if(staffId === 'any'){
+    const svc = DB.services.find(s => s.id === selected.serviceId);
+    const relevant = svc ? DB.staff.filter(s => s.specialization === svc.category) : DB.staff;
+    const pool = relevant.length ? relevant : DB.staff;
+    staffId = pool[Math.floor(Math.random() * pool.length)].id;
+  }
+
+  // create appointment
+  const appt = {
+    id: genId(),
+    clientId: client.id,
+    serviceId: selected.serviceId,
+    staffId: staffId,
+    date: selected.date,
+    time: selected.time,
+    status: 'waiting',
+    notes: 'Онлайн-запись'
+  };
+  DB.appointments.push(appt);
+  client.loyaltyVisits++;
+
+  saveDB();
+  step = 5;
+  render();
+};
+
+window.resetBooking = function(){
+  selected = { serviceId:null, staffId:null, date:null, time:null, name:'', phone:'', instagram:'' };
+  step = 1;
+  render();
+};
+
+// ===== INIT =====
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Алина · ногтевой сервис | Павлодар</title>
+<meta name="description" content="Маникюр, педикюр, дизайн. Запись онлайн в Павлодаре.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #C77B86;
+  --accent-soft: #F3DCE0;
+  --bg: #FBF6F4;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FDF1F2;
+  --text: #2E2426;
+  --text-muted: #9A8B8D;
+  --border: #EFE3E2;
+  --radius: 18px;
+  --font: 'Inter', sans-serif;
+  --display: 'Cormorant Garamond', serif;
+  --max-width: 480px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font);
+  background:
+    radial-gradient(900px 300px at 50% -60px, var(--accent-soft), transparent),
+    var(--bg);
+  color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased;
+}
+.container { max-width: var(--max-width); margin: 0 auto; padding: 48px 16px 40px; }
+section { margin-bottom: 28px; }
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+.header { text-align: center; }
+.logo {
+  width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(145deg, #fff, var(--accent-soft));
+  border: 1px solid var(--border); box-shadow: 0 12px 30px rgba(199,123,134,0.18); font-size: 42px;
+}
+.header h1 { font-family: var(--display); font-size: 38px; font-weight: 600; letter-spacing: .5px; }
+.header .role { color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; margin-top: 2px; }
+.header .city { font-size: 13px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+.status { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 6px 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 999px; font-size: 13px; color: var(--text-muted); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #E58AA0; box-shadow: 0 0 8px #E58AA0; }
+.divider { width: 44px; height: 1px; background: var(--accent); margin: 24px auto; opacity: .5; }
+
+.menu-title { font-family: var(--display); font-size: 22px; font-weight: 600; margin-bottom: 12px; text-align: center; }
+.price-list { display: flex; flex-direction: column; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: 0 8px 24px rgba(199,123,134,0.06); }
+.price-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 18px; border-bottom: 1px solid var(--border); }
+.price-row:last-child { border-bottom: none; }
+.price-row .name { font-weight: 600; font-size: 15px; }
+.price-row .name span { display: block; font-size: 12px; color: var(--text-muted); font-weight: 400; margin-top: 2px; }
+.price-row .price { font-weight: 700; font-size: 15px; color: var(--accent); white-space: nowrap; }
+
+.links { display: flex; flex-direction: column; gap: 10px; }
+.link-btn {
+  display: flex; align-items: center; gap: 14px; padding: 17px 20px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  text-decoration: none; color: var(--text); font-weight: 600; font-size: 15px;
+  box-shadow: 0 6px 18px rgba(199,123,134,0.05);
+  transition: background .3s, transform .2s, border-color .3s;
+}
+.link-btn:hover { background: var(--bg-card-hover); transform: translateX(4px); border-color: var(--accent); }
+.link-btn svg { width: 20px; height: 20px; fill: var(--accent); flex-shrink: 0; }
+.link-btn .arrow { margin-left: auto; fill: #D9C7C9; width: 16px; height: 16px; }
+
+.cta-btn {
+  display: block; width: 100%; padding: 18px;
+  background: var(--accent); color: #fff; border: none; border-radius: var(--radius);
+  font-family: var(--font); font-size: 16px; font-weight: 700;
+  text-align: center; text-decoration: none; cursor: pointer; transition: opacity .3s, transform .2s;
+  box-shadow: 0 10px 24px rgba(199,123,134,0.3);
+}
+.cta-btn:hover { opacity: .92; transform: scale(1.02); }
+.cta-btn:active { transform: scale(.98); }
+
+.footer { text-align: center; padding: 30px 0 6px; }
+.footer p { font-size: 12px; color: #C4B4B6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <section class="header fade-in">
+    <div class="logo">💅</div>
+    <h1>Алина</h1>
+    <p class="role">ногтевой сервис</p>
+    <p class="city">Павлодар</p>
+    <div class="status"><span class="dot"></span>Запись на эту неделю открыта</div>
+  </section>
+
+  <div class="divider fade-in"></div>
+
+  <section class="fade-in">
+    <p class="menu-title">Прайс</p>
+    <div class="price-list">
+      <div class="price-row"><div class="name">Маникюр + покрытие<span>гель-лак, любой цвет</span></div><div class="price">6 000 ₸</div></div>
+      <div class="price-row"><div class="name">Педикюр + покрытие</div><div class="price">8 000 ₸</div></div>
+      <div class="price-row"><div class="name">Наращивание<span>моделирование формы</span></div><div class="price">от 9 000 ₸</div></div>
+      <div class="price-row"><div class="name">Дизайн / френч<span>за 1 ноготь</span></div><div class="price">от 300 ₸</div></div>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <div class="links">
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5z"/></svg>
+        Записаться онлайн
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+        Instagram · мои работы
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        Отзывы клиентов
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+        Адрес кабинета
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <a href="#" class="cta-btn">Записаться в WhatsApp</a>
+  </section>
+
+  <footer class="footer fade-in">
+    <p>© Алина · ногтевой сервис · Павлодар, 2026</p>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var els=document.querySelectorAll('.fade-in');
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:.12});
+  els.forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

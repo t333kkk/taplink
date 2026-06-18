@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Таплинки и мини-сайты за 1 день · Артём</title>
+<meta name="description" content="Делаю современные таплинки и мини-сайты для соцсетей за 1 день. Адаптив, кнопки на запись/WhatsApp/карту. Оплата после.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #FFFFFF;
+  --accent: #6C5CE7;
+  --accent-2: #00D2B8;
+  --bg: #08080C;
+  --bg-card: #121218;
+  --bg-card-hover: #181822;
+  --text: #F4F4F6;
+  --text-muted: #8A8A99;
+  --border: #23232E;
+  --radius: 18px;
+  --font: 'Inter', sans-serif;
+  --max-width: 760px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font);
+  background:
+    radial-gradient(900px 360px at 15% -80px, rgba(108,92,231,0.18), transparent),
+    radial-gradient(700px 320px at 95% 5%, rgba(0,210,184,0.12), transparent),
+    var(--bg);
+  color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; line-height: 1.5;
+}
+.container { max-width: var(--max-width); margin: 0 auto; padding: 56px 18px 56px; }
+.fade-in { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* HERO */
+.hero { text-align: center; margin-bottom: 14px; }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 999px; font-size: 13px; color: var(--text-muted); margin-bottom: 22px; }
+.badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); }
+.hero h1 { font-size: 38px; line-height: 1.12; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
+.hero h1 .grad { background: linear-gradient(100deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 17px; color: var(--text-muted); max-width: 520px; margin: 0 auto 26px; }
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 15px 26px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 15px; transition: transform .2s, opacity .3s, background .3s; }
+.btn-primary { background: linear-gradient(100deg, var(--accent), var(--accent-2)); color: #fff; }
+.btn-primary:hover { transform: scale(1.03); }
+.btn-ghost { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); }
+.btn-ghost:hover { background: var(--bg-card-hover); }
+
+/* META row */
+.meta { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 28px 0 0; }
+.meta-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 999px; padding: 8px 16px; font-size: 13px; color: var(--text-muted); }
+.meta-item b { color: var(--text); }
+
+.section-title { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); text-align: center; margin: 56px 0 22px; }
+
+/* WORKS */
+.works { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+@media (max-width: 640px){ .works { grid-template-columns: 1fr; } }
+.work {
+  display: block; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; text-decoration: none; color: var(--text); transition: transform .25s, border-color .3s, box-shadow .3s;
+}
+.work:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 18px 40px rgba(108,92,231,0.18); }
+.work .thumb { height: 150px; display: flex; align-items: center; justify-content: center; font-size: 54px; }
+.work.t1 .thumb { background: radial-gradient(120px 80px at 50% 30%, rgba(200,162,75,.35), transparent), #0d0d0d; }
+.work.t2 .thumb { background: linear-gradient(160deg, #F3DCE0, #fff); }
+.work.t3 .thumb { background: linear-gradient(160deg, #F1E3D0, #fff); }
+.work .body { padding: 16px 18px; }
+.work .body h3 { font-size: 16px; font-weight: 700; margin-bottom: 3px; }
+.work .body p { font-size: 13px; color: var(--text-muted); }
+.work .open { margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--accent-2); }
+
+/* PRICING */
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+@media (max-width: 640px){ .cards { grid-template-columns: 1fr; } }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; position: relative; }
+.card.featured { border-color: var(--accent); box-shadow: 0 18px 44px rgba(108,92,231,0.16); }
+.card .tag { position: absolute; top: 16px; right: 16px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent-2); }
+.card h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+.card .price { font-size: 26px; font-weight: 800; margin: 8px 0 14px; }
+.card .price span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+.card ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.card li { display: flex; gap: 9px; font-size: 14px; color: var(--text-muted); }
+.card li::before { content: "✓"; color: var(--accent-2); font-weight: 800; }
+
+/* STEPS */
+.steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+@media (max-width: 640px){ .steps { grid-template-columns: 1fr; } }
+.step { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+.step .num { font-size: 13px; font-weight: 800; color: var(--accent-2); margin-bottom: 8px; }
+.step h4 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+.step p { font-size: 13px; color: var(--text-muted); }
+
+/* CTA */
+.cta-box { margin-top: 56px; text-align: center; background: linear-gradient(160deg, rgba(108,92,231,.16), rgba(0,210,184,.08)); border: 1px solid var(--border); border-radius: 24px; padding: 40px 24px; }
+.cta-box h2 { font-size: 26px; font-weight: 800; margin-bottom: 10px; letter-spacing: -.5px; }
+.cta-box p { color: var(--text-muted); margin-bottom: 22px; }
+.guarantee { font-size: 13px; color: var(--text-muted); margin-top: 14px; }
+
+.footer { text-align: center; padding: 40px 0 4px; color: #3a3a44; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <section class="hero fade-in">
+    <span class="badge"><span class="dot"></span>Свободен для заказов · отвечаю за 15 минут</span>
+    <h1>Таплинк или мини-сайт<br>для твоих соцсетей <span class="grad">за 1 день</span></h1>
+    <p>Современный дизайн, идеально под телефон, кнопки на запись, WhatsApp, Instagram и карту. Один шаг между подписчиком и заявкой.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn btn-primary">Заказать в WhatsApp →</a>
+      <a href="#works" class="btn btn-ghost">Смотреть примеры</a>
+    </div>
+    <div class="meta">
+      <div class="meta-item">⚡ Готово за <b>1 день</b></div>
+      <div class="meta-item">💳 Оплата <b>после</b></div>
+      <div class="meta-item">♾ Правки <b>бесплатно</b></div>
+    </div>
+  </section>
+
+  <p class="section-title" id="works">Примеры работ</p>
+  <section class="works fade-in">
+    <a href="../demo-barbershop/" class="work t1">
+      <div class="thumb">💈</div>
+      <div class="body"><h3>BLADE</h3><p>Барбершоп · запись + прайс</p><div class="open">Открыть пример →</div></div>
+    </a>
+    <a href="../demo-nails/" class="work t2">
+      <div class="thumb">💅</div>
+      <div class="body"><h3>Алина</h3><p>Ногтевой сервис · запись</p><div class="open">Открыть пример →</div></div>
+    </a>
+    <a href="../demo-coffee/" class="work t3">
+      <div class="thumb">☕</div>
+      <div class="body"><h3>ZERNO</h3><p>Кофейня · меню + доставка</p><div class="open">Открыть пример →</div></div>
+    </a>
+  </section>
+
+  <p class="section-title">Сколько стоит</p>
+  <section class="cards fade-in">
+    <div class="card featured">
+      <span class="tag">хит</span>
+      <h3>Таплинк под ключ</h3>
+      <div class="price">10 000 ₸ <span>/ ~2 000 ₽</span></div>
+      <ul>
+        <li>Дизайн под твой бренд и цвета</li>
+        <li>Кнопки: запись, WhatsApp, Instagram, карта</li>
+        <li>Прайс / меню на странице</li>
+        <li>Готово за 1 день, правки бесплатно</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Мини-лендинг</h3>
+      <div class="price">от 25 000 ₸ <span>/ ~5 000 ₽</span></div>
+      <ul>
+        <li>Одностраничник с блоками и оффером</li>
+        <li>Форма заявки прямо в WhatsApp/Telegram</li>
+        <li>Галерея работ, отзывы, FAQ</li>
+        <li>Подключение своего домена</li>
+      </ul>
+    </div>
+  </section>
+
+  <p class="section-title">Как мы работаем</p>
+  <section class="steps fade-in">
+    <div class="step"><div class="num">01</div><h4>Скидываешь инфу</h4><p>Логотип, цвета, ссылки, прайс — в свободной форме, я помогу собрать.</p></div>
+    <div class="step"><div class="num">02</div><h4>Делаю за день</h4><p>Присылаю готовую ссылку. Смотришь с телефона, говоришь правки.</p></div>
+    <div class="step"><div class="num">03</div><h4>Платишь после</h4><p>Понравилось — оплачиваешь и забираешь. Ставлю ссылку в шапку.</p></div>
+  </section>
+
+  <section class="cta-box fade-in">
+    <h2>Поставь в шапку ссылку, которая продаёт</h2>
+    <p>Напиши «Хочу таплинк» — и завтра он уже будет в твоём профиле.</p>
+    <a href="#" class="btn btn-primary">Написать в WhatsApp →</a>
+    <p class="guarantee">Оплата только после того, как тебе всё понравится.</p>
+  </section>
+
+  <footer class="footer fade-in">© Артём · таплинки и мини-сайты · Павлодар, 2026</footer>
+
+</div>
+<script>
+(function(){
+  var els=document.querySelectorAll('.fade-in');
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:.1});
+  els.forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZERNO · кофейня | Павлодар</title>
+<meta name="description" content="Кофейня ZERNO — спешелти кофе, выпечка, доставка по Павлодару.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #B66E3C;
+  --accent-2: #2E6B4F;
+  --bg: #F6EFE6;
+  --bg-card: #FFFBF5;
+  --bg-card-hover: #FBF2E6;
+  --text: #2A2018;
+  --text-muted: #998A78;
+  --border: #E9DDCB;
+  --radius: 16px;
+  --font: 'Inter', sans-serif;
+  --display: 'Fraunces', serif;
+  --max-width: 480px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font);
+  background:
+    radial-gradient(800px 280px at 50% -60px, rgba(182,110,60,0.12), transparent),
+    var(--bg);
+  color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased;
+}
+.container { max-width: var(--max-width); margin: 0 auto; padding: 48px 16px 40px; }
+section { margin-bottom: 28px; }
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+.header { text-align: center; }
+.logo {
+  width: 96px; height: 96px; border-radius: 24px; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(145deg, #fff, #F1E3D0);
+  border: 1px solid var(--border); box-shadow: 0 12px 28px rgba(182,110,60,0.18); font-size: 42px;
+}
+.header h1 { font-family: var(--display); font-size: 36px; font-weight: 700; letter-spacing: 1px; }
+.header .role { color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; margin-top: 4px; }
+.header .city { font-size: 13px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+.status { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 6px 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 999px; font-size: 13px; color: var(--text-muted); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); }
+.divider { width: 44px; height: 2px; background: var(--accent); margin: 24px auto; opacity: .5; }
+
+.menu-title { font-family: var(--display); font-size: 22px; font-weight: 600; margin-bottom: 12px; text-align: center; }
+.price-list { display: flex; flex-direction: column; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: 0 8px 22px rgba(182,110,60,0.06); }
+.price-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.price-row:last-child { border-bottom: none; }
+.price-row .name { font-weight: 600; font-size: 15px; }
+.price-row .name span { display: block; font-size: 12px; color: var(--text-muted); font-weight: 400; margin-top: 2px; }
+.price-row .price { font-weight: 700; font-size: 15px; color: var(--accent); white-space: nowrap; }
+
+.links { display: flex; flex-direction: column; gap: 10px; }
+.link-btn {
+  display: flex; align-items: center; gap: 14px; padding: 17px 20px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  text-decoration: none; color: var(--text); font-weight: 600; font-size: 15px;
+  box-shadow: 0 6px 16px rgba(182,110,60,0.05);
+  transition: background .3s, transform .2s, border-color .3s;
+}
+.link-btn:hover { background: var(--bg-card-hover); transform: translateX(4px); border-color: var(--accent); }
+.link-btn svg { width: 20px; height: 20px; fill: var(--accent); flex-shrink: 0; }
+.link-btn .arrow { margin-left: auto; fill: #D8C6AE; width: 16px; height: 16px; }
+
+.cta-btn {
+  display: block; width: 100%; padding: 18px;
+  background: var(--accent-2); color: #fff; border: none; border-radius: var(--radius);
+  font-family: var(--font); font-size: 16px; font-weight: 700;
+  text-align: center; text-decoration: none; cursor: pointer; transition: opacity .3s, transform .2s;
+  box-shadow: 0 10px 22px rgba(46,107,79,0.3);
+}
+.cta-btn:hover { opacity: .92; transform: scale(1.02); }
+.cta-btn:active { transform: scale(.98); }
+
+.footer { text-align: center; padding: 30px 0 6px; }
+.footer p { font-size: 12px; color: #C2B19A; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <section class="header fade-in">
+    <div class="logo">☕</div>
+    <h1>ZERNO</h1>
+    <p class="role">кофейня</p>
+    <p class="city">Павлодар</p>
+    <div class="status"><span class="dot"></span>Открыто · доставка 30–40 мин</div>
+  </section>
+
+  <div class="divider fade-in"></div>
+
+  <section class="fade-in">
+    <p class="menu-title">Меню</p>
+    <div class="price-list">
+      <div class="price-row"><div class="name">Капучино<span>250 / 350 мл</span></div><div class="price">900 / 1 200 ₸</div></div>
+      <div class="price-row"><div class="name">Раф / Латте</div><div class="price">от 1 100 ₸</div></div>
+      <div class="price-row"><div class="name">Фильтр-кофе<span>зерно недели</span></div><div class="price">1 000 ₸</div></div>
+      <div class="price-row"><div class="name">Круассан<span>классический / миндаль</span></div><div class="price">800 ₸</div></div>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <div class="links">
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7.17 14.75l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0020 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 14.37 5.48 16 7 16h12v-2H7.42c-.13 0-.25-.11-.25-.25z"/></svg>
+        Заказать доставку
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+        Мы на карте (2ГИС)
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+        Instagram
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+      <a href="#" class="link-btn">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Меню целиком (PDF)
+        <svg class="arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <a href="#" class="cta-btn">Заказать в WhatsApp</a>
+  </section>
+
+  <footer class="footer fade-in">
+    <p>© ZERNO coffee · Павлодар, 2026</p>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var els=document.querySelectorAll('.fade-in');
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:.12});
+  els.forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>
