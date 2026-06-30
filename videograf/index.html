@@ -215,7 +215,7 @@ em{font-family:var(--serif);font-style:italic;font-weight:500;}
 <!-- HERO -->
 <section id="top" class="hero">
   <div class="hero-bg">
-    <video src="videos/reel-07.mp4" autoplay muted loop playsinline preload="auto"></video>
+    <video id="heroVid" src="videos/reel-07.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture></video>
   </div>
   <div class="wrap">
     <span class="up reveal"><span class="i">01</span>Видеограф · Павлодар / Астана</span>
@@ -369,6 +369,19 @@ em{font-family:var(--serif);font-style:italic;font-weight:500;}
 
 <script>
 (function(){
+  // hero bg video: force autoplay on mobile (muted inline) + start on first touch if blocked
+  var hv=document.getElementById('heroVid');
+  if(hv){
+    hv.muted=true;hv.defaultMuted=true;hv.setAttribute('muted','');
+    var tryPlay=function(){var p=hv.play();if(p&&p.catch)p.catch(function(){});};
+    tryPlay();
+    hv.addEventListener('loadeddata',tryPlay);
+    document.addEventListener('visibilitychange',function(){if(!document.hidden)tryPlay();});
+    var kick=function(){tryPlay();document.removeEventListener('touchstart',kick);document.removeEventListener('click',kick);};
+    document.addEventListener('touchstart',kick,{passive:true});
+    document.addEventListener('click',kick);
+  }
+
   // header solid on scroll
   var hd=document.getElementById('hd');
   var onScroll=function(){hd.classList.toggle('scrolled',window.scrollY>40);};
